@@ -1,16 +1,16 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-# used to translate text in django
 from django.utils.translation import gettext as _
 
 from core import models
+
 
 class UserAdmin(BaseUserAdmin):
     ordering = ['id']
     list_display = ['email', 'name']
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        (_('personal Info'), {'fields': ('name',)}),
+        (_('Personal Info'), {'fields': ('name',)}),
         (
             _('Permissions'),
             {'fields': ('is_active', 'is_staff', 'is_superuser')}
@@ -20,11 +20,10 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'password', 'password2')
+            'fields': ('email', 'password1', 'password2')
         }),
     )
 
 
 admin.site.register(models.User, UserAdmin)
-
 
